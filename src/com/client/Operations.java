@@ -177,7 +177,7 @@ public class Operations {
         IOClient.bw.flush();
     }
 
-    public static void parseCMD(String input, Handler handler) throws IOException {
+    public static void parseCMD(String input, Handler handler) throws Exception {
         if (input.equals("ls")) {
             printContents(handler.contents, false);
         } else if (input.equals("ls -a")) {
@@ -228,7 +228,7 @@ public class Operations {
         return uploadResponse.isResult();
     }
 
-    private static boolean downfile(String input, Handler handler) throws IOException {
+    private static boolean downfile(String input, Handler handler) throws Exception {
         String[] parsed = input.split(" ");
         if (parsed.length != 3) {
             return false;
@@ -251,12 +251,7 @@ public class Operations {
         if (data == null) {
             return false;
         }
-        try {
-            FileOper.writeFile(path, data);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        FileOper.writeFile(path, data);
         return true;
     }
 

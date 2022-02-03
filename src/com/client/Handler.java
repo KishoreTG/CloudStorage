@@ -114,6 +114,16 @@ public class Handler implements Runnable {
         IOClient.bw.newLine();
     }
 
+    private void printError(String message) throws IOException {
+        IOClient.bw.write(MyColors.ERROR);
+        IOClient.bw.newLine();
+        IOClient.bw.write("Error Occurred : " + message);
+        IOClient.bw.newLine();
+        IOClient.bw.write(MyColors.ERROR);
+
+        IOClient.bw.flush();
+    }
+
     @Override
     public void run() {
 
@@ -129,14 +139,27 @@ public class Handler implements Runnable {
                 if (input.equals("exit")) {
                     break;
                 } else {
-                    Operations.parseCMD(input, this);
+                    try {
+                        Operations.parseCMD(input, this);
+                    }
+                    catch (Exception e) {
+                        try {
+                            printError(e.getMessage());
+                        } catch (IOException ew) {
+                            ew.printStackTrace();
+                        }
+                    }
                 }
             }
             separator();
 
             finish();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            try {
+                printError(ex.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
