@@ -93,7 +93,7 @@ public class Handler implements Runnable {
         IOClient.bw.flush();
         Thread.sleep(TIME_BREAK);
 
-        ConsoleOperations.clearConsole();
+//        ConsoleOperations.clearConsole();
     }
 
     private void finish() throws Exception {
@@ -103,7 +103,7 @@ public class Handler implements Runnable {
         IOClient.bw.flush();
         Thread.sleep(TIME_BREAK);
 
-        ConsoleOperations.clearConsole();
+//        ConsoleOperations.clearConsole();
     }
 
     private void debug() throws IOException {
